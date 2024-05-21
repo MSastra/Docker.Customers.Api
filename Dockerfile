@@ -3,9 +3,9 @@ WORKDIR /App
 
 COPY . .
 
-RUN dotnet restore /Customers.Api/Customers.Api.csproj
+RUN dotnet restore Customers.Api/Customers.Api.csproj
 
-RUN dotnet publish /Customers.Api/Customers.Api.csproj -c Release -o out
+RUN dotnet publish Customers.Api/Customers.Api.csproj -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /App
