@@ -4,11 +4,14 @@ namespace Customers.Api.Entities
 {
     public partial class DBContext : DbContext
     {
-        public DBContext()
-        {
-        }
+		private readonly string _connectionString;
 
-        public DBContext(DbContextOptions<DBContext> options)
+		public DBContext(string connectionString)
+		{
+			_connectionString = connectionString;
+		}
+
+		public DBContext(DbContextOptions<DBContext> options)
             : base(options)
         {
         }
@@ -19,7 +22,7 @@ namespace Customers.Api.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL($"server=localhost;port=3306;user={Environment.GetEnvironmentVariable("MYSQL_USER")};password={Environment.GetEnvironmentVariable("MYSQL_ROOT_PASSWORD")};database={Environment.GetEnvironmentVariable("MYSQL_DATABASE")}");
+                optionsBuilder.UseMySQL(_connectionString);
             }
         }
 
